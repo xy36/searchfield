@@ -396,7 +396,9 @@ class _SearchFieldState<T> extends State<SearchField<T>> {
       // When focus shifts to ListView prevent suggestions from rebuilding
       // when user navigates through suggestions using keyboard
       if (!_searchFocus!.hasFocus) {
-        _overlayEntry?.remove();
+        if (_overlayEntry != null && _overlayEntry!.mounted) {
+          _overlayEntry?.remove();
+        }
         if (searchController!.text.isEmpty) {
           selected = null;
         }
